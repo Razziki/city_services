@@ -1,0 +1,13 @@
+<h1>Facilities</h1>
+
+<% if @facilities.any? %>
+  <p><%= @facilities.total_count %> facilities found</p>
+  <ul>
+    <% @facilities.each do |f| %>
+      <li><%= link_to f.name, f %> - <%= f.city.name %></li>
+    <% end %>
+  </ul>
+  <%= paginate @facilities %>
+<% else %>
+  <p>No facilities available.</p>
+<% end %>
