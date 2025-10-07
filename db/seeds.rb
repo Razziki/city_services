@@ -10,15 +10,15 @@
 require "csv"
 require "faker"
 
-csv_path = Rails.root.join("db/csv/canadian_cities.csv")
+csv_path = Rails.root.join("db/csv/canadacities.csv")
 
 puts "Importing Cities..."
 inserted = 0
 
-CSV.foreach(csv_path, headers: true) do |row|
+CSV.foreach(csv_path, headers: true).first(50).each do |row|
   city = City.find_or_create_by!(
-    name: row["city"].strip,
-    province: row["province_name"].strip,
+    name: row["city"],
+    province: row["province_name"],
     country: "Canada",
     lat: row["lat"],
     lng: row["lng"]
@@ -28,15 +28,18 @@ end
 
 puts "Cities imported: #{inserted}"
 
-puts "Seeding sample facilities and services..."
-10.times do
-  city = City.order("RANDOM()").first  # pick a random city
+City.find_each do |city|
+  next if city.facilities.exists?  
+
+puts "Seed sample facilities"
+City.find_each do |city|
   facility = city.facilities.create!(
     name: "#{Faker::Company.name} Facility",
     address: Faker::Address.street_address,
-    lat: city.lat,
-    lng: city.lng
+    lat: city.lat.to_f + rand(-0.01..0.01), # to have the facility locations somewhat within the city
+    lng: city.lng.to_f + rand(-0.01..0.01)  # to have the facility locations somewhat within the city
   )
+
 
   # Create a few random services for each facility
   2.times do
