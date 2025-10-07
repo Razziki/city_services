@@ -5,3 +5,15 @@
 <p><strong>Longitude:</strong> <%= @facility.lng %></p>
 
 <p><%= link_to "Back to Facilities", facilities_path %></p>
+
+<h2>Services Offered</h2>
+
+<% if @facility.services.any? %>
+  <ul>
+    <% @facility.services.each do |s| %>
+      <li><%= link_to s.name, s %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No services listed for this facility.</p>
+<% end %>
