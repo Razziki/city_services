@@ -17,8 +17,8 @@ inserted = 0
 
 CSV.foreach(csv_path, headers: true).first(50).each do |row|
   city = City.find_or_create_by!(
-    name: row["city"],
-    province: row["province_name"],
+    name: row["city"].to_s.strip,
+    province: row["province_name"].to_s.strip,
     country: "Canada",
     lat: row["lat"],
     lng: row["lng"]
@@ -28,12 +28,9 @@ end
 
 puts "Cities imported: #{inserted}"
 
-City.find_each do |city|
-  next if city.facilities.exists?  
-
 puts "Seed sample facilities"
 City.find_each do |city|
-  facility = city.facilities.create!(
+    facility = city.facilities.create!(
     name: "#{Faker::Company.name} Facility",
     address: Faker::Address.street_address,
     lat: city.lat.to_f + rand(-0.01..0.01), # to have the facility locations somewhat within the city
