@@ -1,0 +1,23 @@
+<h1>Cities</h1>
+
+<%= form_with url: cities_path, method: :get, local: true do %>
+  <input
+    type="text"
+    name="search"
+    value="<%= @search %>"
+    placeholder="Search by city or province"
+    aria-label="Search by city or province">
+  <button type="submit">Search</button>
+<% end %>
+
+<% if @cities.any? %>
+  <p><%= @cities.total_count %> result<%= "s" if @cities.total_count != 1 %></p> <!--total_count instead of count after pagination  -->
+  <ul>
+    <% @cities.each do |c| %>
+      <li><%= link_to "#{c.name}, #{c.province}", c %></li>
+    <% end %>
+  </ul>
+  <%= paginate @cities %> <!-- add navigation -->
+<% else %>
+  <p>No cities matched your search.</p>
+<% end %>
