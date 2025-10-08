@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get "services/index"
-  get "services/show"
-  root to: "cities#index"
+  get "about", to: "pages#about" # directed to a static page not a data source
+  root to: "cities#index" # homepage
   resources :cities, only: %i[index show]
   resources :facilities, only: %i[index show]
   resources :services, only: %i[index show]
