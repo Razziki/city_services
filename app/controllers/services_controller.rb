@@ -10,6 +10,6 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @service = Service.find(params[:id])
+    @service = Service.includes(facilities: :city).find(params[:id])
   end
 end
