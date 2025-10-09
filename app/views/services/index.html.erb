@@ -14,7 +14,7 @@
   <p><%= @services.total_count %> services found</p>
   <ul>
     <% @services.each do |s| %>
-      <li><%= link_to s.name, s %> – <%= s.category %></li>
+      <li><%= link_to s.name, s %> - <%= s.category %></li>
     <% end %>
   </ul>
   <%= paginate @services %>

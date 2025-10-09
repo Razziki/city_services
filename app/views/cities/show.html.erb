@@ -2,7 +2,22 @@
 
 <p><strong>Country:</strong> <%= @city.country %></p>
 
-<p><strong>Coords:</strong> <%= @city.lat %>, <%= @city.lng %></p>
+<h2>Location</h2>
+<!-- Code below for google maps was generated using chatgpt-->
+<% if @city.lat && @city.lng %>
+  <iframe
+    width="600"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps?q=<%= @city.lat %>,<%= @city.lng %>&hl=en&z=14&output=embed">
+  </iframe>
+<% else %>
+  <p>Location not available.</p>
+<% end %>
+
 
 
 <p><%= link_to "Back to Cities", cities_path %></p>

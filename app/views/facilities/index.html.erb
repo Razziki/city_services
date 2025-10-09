@@ -15,7 +15,7 @@
 
 <ul>
   <% @facilities.each do |f| %>
-    <li><%= f.name %> - <%= f.city.name %></li>
+    <li><%= link_to f.name, f %> - <%= f.city.name %></li>
   <% end %>
 </ul>
 <%= paginate @facilities %>
