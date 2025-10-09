@@ -1,13 +1,21 @@
 <h1>Facilities</h1>
-
-<% if @facilities.any? %>
-  <p><%= @facilities.total_count %> facilities found</p>
-  <ul>
-    <% @facilities.each do |f| %>
-      <li><%= link_to f.name, f %> - <%= f.city.name %></li>
+<!--i lookup this form part online -->
+<%= form_with url: facilities_path, method: :get, local: true do %>
+  <label>City:</label>
+  <select name="city_id">
+    <option value="">All</option>
+    <% @cities.each do |c| %>
+      <option value="<%= c.id %>" <%= "selected" if c.id.to_s == params[:city_id].to_s %>>
+        <%= c.name %>
+      </option>
     <% end %>
-  </ul>
-  <%= paginate @facilities %>
-<% else %>
-  <p>No facilities available.</p>
+  </select>
+  <button type="submit">Filter</button>
 <% end %>
+
+<ul>
+  <% @facilities.each do |f| %>
+    <li><%= f.name %> - <%= f.city.name %></li>
+  <% end %>
+</ul>
+<%= paginate @facilities %>
