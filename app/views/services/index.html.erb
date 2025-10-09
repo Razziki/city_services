@@ -1,5 +1,15 @@
 <h1>Services</h1>
 
+<%= form_with url: services_path, method: :get, local: true do %>
+  <input
+    type="text"
+    name="search"
+    value="<%= @search %>"
+    placeholder="Search by service"
+    aria-label="Search by service">
+  <button type="submit">Search</button>
+<% end %>
+
 <% if @services.any? %>
   <p><%= @services.total_count %> services found</p>
   <ul>
