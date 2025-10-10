@@ -12,12 +12,14 @@
 
 <% if @cities.any? %>
   <p><%= @cities.total_count %> result<%= "s" if @cities.total_count != 1 %></p> <!--total_count instead of count after pagination  -->
-  <ul>
+  <ul class="d-inline-block text-start">
     <% @cities.each do |c| %>
       <li><%= link_to "#{c.name}, #{c.province}", c %></li>
     <% end %>
   </ul>
+  <nav class="d-flex justify-content-center my-3 kami">
   <%= paginate @cities %> <!-- add navigation -->
+  </nav>
 <% else %>
   <p>No cities matched your search.</p>
 <% end %>

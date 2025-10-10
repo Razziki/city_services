@@ -8,3 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.kami a,
+.kami span {
+  margin: 0 0.2rem;
+}

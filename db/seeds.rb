@@ -26,26 +26,49 @@ CSV.foreach(csv_path, headers: true).first(50).each do |row|
   inserted += 1
 end
 
-puts "Cities imported: #{inserted}"
+puts "Seed sample facilities and services"
 
-puts "Seed sample facilities"
-City.find_each do |city|
-    facility = city.facilities.create!(
-    name: "#{Faker::Company.name} Facility",
-    address: Faker::Address.street_address,
-    lat: city.lat.to_f + rand(-0.01..0.01), # to have the facility locations somewhat within the city
-    lng: city.lng.to_f + rand(-0.01..0.01)  # to have the facility locations somewhat within the city
-  )
+# Create service categories, names. At the end I realized faker was not giving me realistic matches so I created my own.
+service_data = {
+  "Automotive" => [ "Oil Change", "Brake Service", "Battery Replacement" ],
+  "Beauty"     => [ "Haircut", "Spa Treatment", "Nail Salon" ],
+  "Health"     => [ "Physiotherapy", "Dental Checkup", "Massage Therapy" ],
+  "Home"       => [ "Plumbing", "Electrical Repair", "House Cleaning" ],
+  "Outdoors"   => [ "Landscaping", "Snow Removal", "Lawn Care" ],
+  "Food"       => [ "Catering", "Bakery", "Meal Delivery" ],
+  "Education"  => [ "Tutoring", "Music Lessons", "Language Classes" ],
+  "Sports"     => [ "Personal Training", "Yoga Class", "Swim Lessons" ],
+  "Travel"     => [ "Car Rental", "Tour Guide", "Airport Shuttle" ]
+}
 
-
-  # Create a few random services for each facility
-  2.times do
-    service = Service.find_or_create_by!(
-      name: Faker::Commerce.department(max: 1, fixed_amount: true),
-      category: Faker::Commerce.material
-    )
-    FacilityService.find_or_create_by!(facility: facility, service: service)
+# Create the sercives
+service_data.each do |category, names|
+  names.each do |name|
+    Service.find_or_create_by!(name: name, category: category)
   end
 end
 
-puts "Faker data added!"
+services = Service.all
+
+# Create multiple facilities per city, each with random services
+City.find_each do |city|
+  number_of_facilities = rand(2..4)
+
+  number_of_facilities.times do
+    facility = city.facilities.create!(
+      name: "#{Faker::Company.name} Facility",
+      address: Faker::Address.street_address,
+      lat: city.lat.to_f + rand(-0.01..0.01),
+      lng: city.lng.to_f + rand(-0.01..0.01)
+    )
+
+    number_of_services = rand(2..5)
+    selected_services = services.sample(number_of_services)
+
+    selected_services.each do |service|
+      FacilityService.find_or_create_by!(facility: facility, service: service)
+    end
+  end
+end
+
+puts "Faker data added successfully!"

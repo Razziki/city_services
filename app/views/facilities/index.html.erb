@@ -12,10 +12,15 @@
   </select>
   <button type="submit">Filter</button>
 <% end %>
-
-<ul>
+<p><%= @facilities.total_count %> result<%= "s" if @facilities.total_count != 1 %></p>
+  <ul class="d-inline-block text-start">
   <% @facilities.each do |f| %>
     <li><%= link_to f.name, f %> - <%= f.city.name %></li>
   <% end %>
 </ul>
+  <nav class="d-flex justify-content-center my-3 kami">
 <%= paginate @facilities %>
+</nav>
+
+
+

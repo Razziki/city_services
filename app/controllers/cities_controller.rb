@@ -13,6 +13,5 @@ class CitiesController < ApplicationController
 
   def show
     @city = City.find(params[:id])
-    # @facilities = @city.facilities.order(:name).page(params[:page]).per(10)
   end
 end

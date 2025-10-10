@@ -1,3 +1,8 @@
+<div class="container text-center">
 <h1>About</h1>
-<p><strong>Data sources:</strong> Canadian Cities CSV + Faker.</p>
+<p><strong>Data sources:</strong> Canadian Cities CSV + Faker and Syntetic</p>
 <p>ERD: City has many Facilities; Facility has many Services through FacilityService.</p>
+<p>The database contains 50 cities (imported from a CSV file), 159 facilities (generated using the Faker gem, with 2-4 facilities per city), and 27 fictional services (manually created). Each facility offers between 2 and 5 services, resulting in approximately 550 total facility-service associations on average.
+
+At minimum, if every city had only 2 facilities and each facility offered only 2 services, the database would contain 50 cities, 100 facilities, 27 services, and 200 facility_service associations (a total of 377 records).</p>
+</div>

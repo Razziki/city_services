@@ -18,7 +18,7 @@
 <p><%= link_to "Back to Facilities", facilities_path %></p>
 
 <h2>Services Offered</h2>
-
+  <ul class="d-inline-block text-start">
 <% if @facility.services.any? %>
   <ul>
     <% @facility.services.each do |s| %>
@@ -28,3 +28,5 @@
 <% else %>
   <p>No services listed for this facility.</p>
 <% end %>
+
+
