@@ -1,15 +1,18 @@
-<h1><%= @service.name %></h1>
+<div class="container m-4">
+<h1 class="display-6 text-center mb-3"><%= @service.name %></h1>
 <p><strong>Category:</strong> <%= @service.category %></p>
 
 <h2>Facilities offering this service</h2>
 <% if @service.facilities.any? %>
   <ul class="d-inline-block text-start">
     <% @service.facilities.each do |f| %>
-      <li><%= link_to f.name, f %> – <%= f.city.name %></li>
+      <li><%= link_to f.name, f %> - <%= f.city.name %></li>
     <% end %>
   </ul>
+
 <% else %>
   <p>No facilities currently offer this service.</p>
 <% end %>
 
 <p><%= link_to "Back to Services", services_path %></p>
+</div>

@@ -1,4 +1,5 @@
-<h1><%= @facility.name %></h1>
+<div class="container m-4">
+<h1 class="display-6 text-center mb-3"><%= @facility.name %></h1>
 <p><strong>Address:</strong> <%= @facility.address %></p>
 <p><strong>City:</strong> <%= link_to @facility.city.name, @facility.city %></p>
 <!--Below googl maps code was generated using chatgpt -->
@@ -18,9 +19,8 @@
 <p><%= link_to "Back to Facilities", facilities_path %></p>
 
 <h2>Services Offered</h2>
+  <% if @facility.services.any? %>
   <ul class="d-inline-block text-start">
-<% if @facility.services.any? %>
-  <ul>
     <% @facility.services.each do |s| %>
       <li><%= link_to s.name, s %></li>
     <% end %>
@@ -28,5 +28,4 @@
 <% else %>
   <p>No services listed for this facility.</p>
 <% end %>
-
-
+</div>

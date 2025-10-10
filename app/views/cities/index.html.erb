@@ -1,5 +1,5 @@
-<h1>Cities</h1>
-
+<div class="container m-4">
+<h1 class="display-6 text-center mb-3">Cities</h1>
 <%= form_with url: cities_path, method: :get, local: true do %>
   <input
     type="text"
@@ -23,3 +23,4 @@
 <% else %>
   <p>No cities matched your search.</p>
 <% end %>
+</div>
