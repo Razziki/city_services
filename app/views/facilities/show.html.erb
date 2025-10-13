@@ -2,7 +2,7 @@
 <h1 class="display-6 text-center mb-3"><%= @facility.name %></h1>
 <p><strong>Address:</strong> <%= @facility.address %></p>
 <p><strong>City:</strong> <%= link_to @facility.city.name, @facility.city %></p>
-<!--Below googl maps code was generated using chatgpt -->
+<!--Below googl maps code was generated using chatgpt to embed my coordinates to google maps -->
 <% if @facility.lat && @facility.lng %>
   <iframe
     width="600"

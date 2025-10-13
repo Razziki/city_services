@@ -2,7 +2,7 @@
 <h1 class="display-6 text-center mb-3">Facilities</h1>
 <!--i lookup this form part online -->
 <%= form_with url: facilities_path, method: :get, local: true do %>
-  <label>City:</label>
+  <label for>City:</label>
   <select name="city_id">
     <option value="">All</option>
     <% @cities.each do |c| %>
